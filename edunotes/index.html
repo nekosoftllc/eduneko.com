@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduNotes — Coming soon to Apple platforms</title>
+<meta name="description" content="EduNotes is the upcoming native workspace for teachers, trainers, speakers, and students. Annotate PDFs naturally with Apple Pencil and present pure, borderless content to any screen.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="js/main.js"></script>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="icon" href="assets/favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+</head>
+
+<body class="font-sans bg-white text-charcoal antialiased">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-3 focus:rounded-2xl focus:bg-brand focus:px-4 focus:py-2 focus:text-white">Skip to content</a>
+
+<!-- ============ Header ============ -->
+<header class="glass sticky top-0 z-40 border-b border-hairline">
+  <div class="mx-auto flex max-w-shell items-center justify-between gap-4 px-6 py-3">
+
+    <a href="#top" class="flex items-center gap-2.5">
+      <img src="assets/logo.png" width="931" height="478" alt="" aria-hidden="true" class="h-7 w-auto">
+      <span class="text-[17px] font-semibold tracking-tighter-display">EduNotes</span>
+    </a>
+
+    <div class="flex items-center gap-3">
+      <span class="hidden rounded-2xl bg-brand-tint px-3 py-1.5 text-[12px] font-medium text-brand md:inline-block">Coming to iPadOS, macOS &amp; iOS</span>
+      <a href="#early-access" class="rounded-2xl bg-brand px-4 py-2 text-[14px] font-medium text-white transition-colors hover:bg-brand-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2">Get Early Access</a>
+    </div>
+
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section id="top" class="px-6 pb-20 pt-20 md:pb-28 md:pt-28">
+    <div class="mx-auto max-w-shell">
+
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="inline-block rounded-2xl bg-brand-tint px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">Coming soon to Apple platforms</span>
+
+        <h1 class="tracking-tighter-display mt-7 text-[40px] font-semibold leading-[1.06] md:text-[64px]">The canvas for clear explanations is almost here.</h1>
+
+        <p class="mx-auto mt-6 max-w-2xl text-[18px] leading-relaxed text-muted md:text-[20px]">EduNotes is the upcoming native workspace for teachers, trainers, speakers, and students. Annotate PDFs naturally with Apple Pencil and present pure, borderless content to any screen.</p>
+
+        <!-- Early access form: joins the EduNotes waitlist via the Eduneko API, double opt-in
+             (see js/main.js), and falls back to the visitor's mail app if the API is unreachable.
+             The #early-access anchor sits on the wrapper, not the <form>, and carries
+             scroll-mt so the sticky header never covers the email and role fields. -->
+        <div id="early-access" class="scroll-mt-32">
+        <form class="mx-auto mt-10 max-w-xl" novalidate>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <label class="sr-only" for="hero-email">Email address</label>
+            <input id="hero-email" name="email" type="email" required autocomplete="email" placeholder="your@email.com"
+                   class="min-w-0 flex-1 rounded-2xl border border-hairline bg-white px-4 py-3 text-[15px] text-charcoal placeholder:text-muted/70 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand">
+
+            <label class="sr-only" for="hero-role">I am a</label>
+            <select id="hero-role" name="role"
+                    class="rounded-2xl border border-hairline bg-white px-4 py-3 text-[15px] text-charcoal focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand">
+              <option value="teacher">Teacher / Educator</option>
+              <option value="trainer">Trainer / Speaker</option>
+              <option value="student">Student</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+            <label>Leave this empty <input name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+
+          <button type="submit" class="mt-3 w-full rounded-2xl bg-brand px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-brand-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2">Request Early Access</button>
+
+          <p class="mt-3 text-[13px] text-muted">No spam. Only private beta invites and launch updates. We'll email you a link to confirm. <a href="../privacy/" class="underline underline-offset-2 hover:text-charcoal">Privacy</a></p>
+          <p class="mt-2 min-h-[1.5em] text-[14px] font-medium text-brand" role="status" aria-live="polite" data-form-status></p>
+        </form>
+        </div>
+      </div>
+
+      <!-- Visual frame container — carousel of real app screenshots (see js/main.js).
+           Slides are 2732x2048 (4:3); the frame is capped at max-w-4xl so the hero
+           does not push the rest of the page below the fold. -->
+      <div class="mx-auto mt-16 max-w-4xl rounded-3xl border border-hairline bg-studio p-3 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.25)] md:mt-20 md:p-4">
+        <div class="relative overflow-hidden rounded-2xl bg-white" data-carousel aria-roledescription="carousel" aria-label="EduNotes app previews">
+
+          <div class="flex" data-carousel-track>
+            <figure class="w-full shrink-0" aria-roledescription="slide" aria-label="1 of 3">
+              <img src="assets/hero1.jpeg" width="1280" height="960" loading="eager" decoding="async"
+                   alt="EduNotes on iPad: a Japanese class worksheet annotated with colour-coded handwritten vocabulary notes in the margins."
+                   class="aspect-[4/3] w-full object-cover">
+            </figure>
+            <figure class="w-full shrink-0" aria-roledescription="slide" aria-label="2 of 3">
+              <img src="assets/hero2.jpeg" width="1280" height="960" loading="lazy" decoding="async"
+                   alt="EduNotes on iPad: a hand-drawn Cloud IAM diagram for a cloud security course, with the shape tool popover open."
+                   class="aspect-[4/3] w-full object-cover">
+            </figure>
+            <figure class="w-full shrink-0" aria-roledescription="slide" aria-label="3 of 3">
+              <img src="assets/hero3.jpeg" width="1280" height="960" loading="lazy" decoding="async"
+                   alt="EduNotes on iPad: lecture notes beside the presentation panel, showing Present on Display and Stream to Browser."
+                   class="aspect-[4/3] w-full object-cover">
+            </figure>
+          </div>
+
+          <button type="button" data-carousel-prev aria-label="Previous preview"
+                  class="glass absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-hairline text-charcoal transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>
+          </button>
+          <button type="button" data-carousel-next aria-label="Next preview"
+                  class="glass absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-hairline text-charcoal transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+          </button>
+
+          <div class="glass absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-2xl border border-hairline px-3 py-2" data-carousel-dots>
+            <button type="button" data-carousel-dot aria-label="Show preview 1"></button>
+            <button type="button" data-carousel-dot aria-label="Show preview 2"></button>
+            <button type="button" data-carousel-dot aria-label="Show preview 3"></button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ Section 2 · Core Purpose ============ -->
+  <section class="border-y border-hairline bg-studio px-6 py-20 md:py-28">
+    <div class="mx-auto grid max-w-shell items-center gap-12 md:grid-cols-2 md:gap-16">
+
+      <div>
+        <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">Purpose-built for presenting &amp; thinking</p>
+        <h2 class="tracking-tighter-display mt-5 text-[32px] font-semibold leading-[1.12] md:text-[44px]">Stop fighting static decks and cluttered screen shares.</h2>
+        <p class="mt-6 text-[17px] leading-relaxed text-muted md:text-[18px]">Traditional presentation tools force you into rigid slides, while generic PDF readers clutter your audience's view with toolbars and menus. EduNotes bridges the gap with a clean, dual-display engine designed around how you actually explain ideas.</p>
+      </div>
+
+      <figure class="overflow-hidden rounded-2xl border border-hairline shadow-[0_18px_44px_-26px_rgba(0,0,0,0.35)]">
+        <img src="assets/preview-display-mode.jpeg" width="1280" height="960" loading="lazy" decoding="async"
+             alt="An iPad running EduNotes on a desk, its toolbars and colour palette in view, while the monitor behind shows the same Git course slide full-screen with no interface around it."
+             class="aspect-[4/3] w-full object-cover">
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ============ Section 3 · Audience Workflow Matrix ============ -->
+  <section class="px-6 py-20 md:py-28">
+    <div class="mx-auto max-w-shell">
+
+      <h2 class="tracking-tighter-display mx-auto max-w-2xl text-center text-[32px] font-semibold leading-[1.12] md:text-[44px]">Designed for anyone who explains complex ideas.</h2>
+
+      <div class="mt-14 grid gap-6 md:grid-cols-2">
+
+        <article class="rounded-3xl border border-hairline bg-white p-6 md:p-8">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">Teachers</p>
+          <h3 class="tracking-tighter-display mt-3 text-[24px] font-semibold">Teach from the page.</h3>
+          <p class="mt-3 text-[16px] leading-relaxed text-muted">Turn lesson plans into living whiteboards. Write over diagrams and keep your private teaching notes visible only to you.</p>
+          <figure class="mt-6 overflow-hidden rounded-2xl border border-hairline">
+            <img src="assets/preview-teachers.jpeg" width="2732" height="2048" loading="lazy" decoding="async"
+                 alt="EduNotes on iPad showing a hand-drawn Logical Topology diagram from a Google Cloud Overview lesson, with numbered boxes linking Organization, Folders, Project and Resources in coloured ink on a grid page, the pen toolbar open and a page strip showing page 2 of 27."
+                 class="aspect-[4/3] w-full object-cover">
+          </figure>
+        </article>
+
+        <article class="rounded-3xl border border-hairline bg-white p-6 md:p-8">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">Trainers</p>
+          <h3 class="tracking-tighter-display mt-3 text-[24px] font-semibold">Adapt in real time.</h3>
+          <p class="mt-3 text-[16px] leading-relaxed text-muted">Break away from rigid training decks to answer unexpected trainee questions visually directly on your courseware.</p>
+          <figure class="mt-6 overflow-hidden rounded-2xl border border-hairline">
+            <img src="assets/preview-trainers.jpeg" width="2732" height="2048" loading="lazy" decoding="async"
+                 alt="EduNotes on iPad showing a Version Control slide from a Git course, with key words underlined in orange ink, the Presenter Notes panel open beside the slide, and a page strip showing slide 7 of 202."
+                 class="aspect-[4/3] w-full object-cover">
+          </figure>
+        </article>
+
+        <article class="rounded-3xl border border-hairline bg-white p-6 md:p-8">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">Speakers</p>
+          <h3 class="tracking-tighter-display mt-3 text-[24px] font-semibold">Stage-ready precision.</h3>
+          <p class="mt-3 text-[16px] leading-relaxed text-muted">Present clean visual feeds to the venue screen while your navigation, toolbars, and cues remain private on your iPad.</p>
+          <figure class="mt-6 overflow-hidden rounded-2xl border border-hairline">
+            <img src="assets/preview-speakers.jpeg" width="1280" height="955" loading="lazy" decoding="async"
+                 alt="Side by side comparison labelled Presenter's View and Audience's View: an iPad held with Apple Pencil showing toolbars and a private notes panel over a DevFest talk slide, next to an external monitor showing the same slide edge to edge with no interface."
+                 class="aspect-[4/3] w-full object-cover">
+          </figure>
+        </article>
+
+        <article class="rounded-3xl border border-hairline bg-white p-6 md:p-8">
+          <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">Students</p>
+          <h3 class="tracking-tighter-display mt-3 text-[24px] font-semibold">Think in the margins.</h3>
+          <p class="mt-3 text-[16px] leading-relaxed text-muted">Solve problem sets, mark up lecture notes, and present your findings cleanly during group work.</p>
+          <figure class="mt-6 overflow-hidden rounded-2xl border border-hairline">
+            <img src="assets/preview-students.jpeg" width="2732" height="2048" loading="lazy" decoding="async"
+                 alt="EduNotes showing an OpenStax Calculus problem set, with a related-rates problem worked out by hand in the margin and the answer boxed in a note."
+                 class="aspect-[4/3] w-full object-cover">
+          </figure>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Section 4 · Technical Excellence ============ -->
+  <section class="border-y border-hairline bg-studio px-6 py-20 md:py-28">
+    <div class="mx-auto grid max-w-shell gap-10 md:grid-cols-3 md:gap-8">
+
+      <div class="border-t-2 border-brand pt-8">
+        <div class="flex aspect-square w-full items-center justify-center rounded-2xl bg-brand-tint" aria-hidden="true">
+          <svg viewBox="0 0 34 18" fill="none" stroke="#1034A6" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round" class="h-auto w-3/4">
+            <!-- External display -->
+            <rect x="1" y="1.5" width="15" height="11" rx="2"/>
+            <path d="M8.5 12.5v3.5"/><path d="M5.5 16h6"/>
+            <!-- Browser window -->
+            <rect x="18" y="3.25" width="15" height="11" rx="2"/>
+            <path d="M18 6.75h15"/>
+            <circle cx="20.3" cy="5" r="0.6"/><circle cx="22.3" cy="5" r="0.6"/>
+            <!-- Web globe -->
+            <circle cx="25.5" cy="10.5" r="2.6"/>
+            <ellipse cx="25.5" cy="10.5" rx="1.12" ry="2.6"/>
+            <path d="M22.9 10.5h5.2"/>
+          </svg>
+        </div>
+        <h3 class="tracking-tighter-display mt-7 text-[22px] font-semibold">External Display Output</h3>
+        <p class="mt-2 text-[16px] leading-relaxed text-muted">True zero-chrome stage feed — to a connected display, or cast straight to any browser.</p>
+      </div>
+
+      <div class="border-t-2 border-brand pt-8">
+        <figure class="overflow-hidden rounded-2xl border border-hairline">
+          <img src="assets/preview-pencil-engine.jpeg" width="1280" height="1280" loading="lazy" decoding="async"
+               alt="Close-up of an Apple Pencil drawing a crisp blue ink trace across a circuit schematic on an iPad, carrying the line out of a NAND gate through resistors R14 and R17 to a node labelled SIG_OUT."
+               class="aspect-square w-full object-cover">
+        </figure>
+        <h3 class="tracking-tighter-display mt-7 text-[22px] font-semibold">Sub-Millisecond Latency</h3>
+        <p class="mt-2 text-[16px] leading-relaxed text-muted">Apple Pencil vector ink engine.</p>
+      </div>
+
+      <div class="border-t-2 border-brand pt-8">
+        <div class="flex aspect-square w-full items-center justify-center rounded-2xl bg-brand-tint" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1034A6" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="h-auto w-1/2">
+            <path d="M12 3l7 3v5.5c0 4.2-2.9 7.9-7 9-4.1-1.1-7-4.8-7-9V6z"/><path d="M9.5 12.2l1.8 1.8 3.4-3.6"/>
+          </svg>
+        </div>
+        <h3 class="tracking-tighter-display mt-7 text-[22px] font-semibold">100% Local &amp; Private</h3>
+        <p class="mt-2 text-[16px] leading-relaxed text-muted">Device-first document ownership.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ Section 5 · Footer & VIP Beta Signup ============ -->
+<footer class="bg-space px-6 py-20 text-white md:py-28">
+  <div class="mx-auto max-w-shell">
+
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="tracking-tighter-display text-[32px] font-semibold leading-[1.12] md:text-[44px]">Get early beta access and launch updates.</h2>
+
+      <!-- Secondary signup: same handler as the hero form (see js/main.js) -->
+      <form class="mx-auto mt-9 max-w-lg" novalidate>
+        <div class="flex flex-col gap-3 sm:flex-row">
+        <label class="sr-only" for="footer-email">Email address</label>
+        <input id="footer-email" name="email" type="email" required autocomplete="email" placeholder="your@email.com"
+               class="min-w-0 flex-1 rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-[15px] text-white placeholder:text-white/40 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand">
+        <button type="submit" class="rounded-2xl bg-brand px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-brand-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-space">Request Early Access</button>
+        </div>
+        <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+          <label>Leave this empty <input name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <p class="mt-3 text-[13px] text-white/50">We'll email you a link to confirm. <a href="../privacy/" class="underline underline-offset-2 hover:text-white">Privacy</a></p>
+        <p class="mt-2 min-h-[1.5em] text-[14px] font-medium text-white/90" role="status" aria-live="polite" data-form-status></p>
+      </form>
+    </div>
+
+    <div class="mt-16 flex flex-col items-center gap-4 border-t border-white/10 pt-8 text-[13px] text-white/50 md:flex-row md:justify-between">
+      <nav class="flex flex-wrap items-center justify-center gap-x-2 gap-y-2">
+        <a href="../privacy/" class="transition-colors hover:text-white">Privacy Policy</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="#" class="transition-colors hover:text-white">Platform Requirements</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="../#contact" class="transition-colors hover:text-white">Contact</a>
+      </nav>
+      <p>Copyright 2026 EduNotes.</p>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>

@@ -43,4 +43,101 @@
 
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* Forms: Gliff waitlist (form[data-signup]) and contact (form[data-contact]) post to
+     the Eduneko API. Signups are double opt-in: success means "check your inbox". If the
+     API is unreachable, the status line offers the form's data-fallback mailto link. */
+  var LOCAL = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+  var API = LOCAL ? "http://localhost:8080" : "https://api.eduneko.cloud";
+
+  function postJSON(path, data) {
+    return fetch(API + path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (body) {
+        return { status: res.status, body: body };
+      });
+    });
+  }
+
+  function setStatus(form, text, kind, fallback) {
+    var el = form.querySelector("[data-form-status]");
+    el.className = "form-status" + (kind ? " is-" + kind : "");
+    el.textContent = text;
+    if (fallback) {
+      el.appendChild(document.createTextNode(" "));
+      var a = document.createElement("a");
+      a.href = fallback;
+      a.textContent = "Email us instead.";
+      el.appendChild(a);
+    }
+  }
+
+  function failure(form, res) {
+    var fallback = form.getAttribute("data-fallback");
+    if (res && res.status === 400) {
+      setStatus(form, "Please check the form: " + (res.body.error || "something isn't right") + ".", "error");
+    } else if (res && res.status === 429) {
+      setStatus(form, "Too many attempts. Please try again in a few minutes.", "error", fallback);
+    } else {
+      setStatus(form, "Sorry, that didn't go through.", "error", fallback);
+    }
+  }
+
+  function wireForm(form, path, collect, success) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var fields = form.querySelectorAll("input, select, textarea");
+      for (var i = 0; i < fields.length; i++) {
+        if (!fields[i].checkValidity()) {
+          fields[i].reportValidity();
+          return;
+        }
+      }
+      var button = form.querySelector("button[type=submit]");
+      button.disabled = true;
+      setStatus(form, "Sending…");
+      postJSON(path, collect()).then(function (res) {
+        if (res.status >= 200 && res.status < 300) {
+          form.reset();
+          setStatus(form, success, "ok");
+        } else {
+          failure(form, res);
+        }
+      }, function () {
+        failure(form, null);
+      }).then(function () {
+        button.disabled = false;
+      });
+    });
+  }
+
+  var signupForms = document.querySelectorAll("form[data-signup]");
+  for (var s = 0; s < signupForms.length; s++) {
+    (function (form) {
+      wireForm(form, "/signups", function () {
+        return {
+          email: form.elements.email.value.trim(),
+          product: form.getAttribute("data-signup"),
+          website: form.elements.website.value
+        };
+      }, "Almost there. Check your inbox for a link to confirm.");
+    })(signupForms[s]);
+  }
+
+  var contactForm = document.querySelector("form[data-contact]");
+  if (contactForm) {
+    wireForm(contactForm, "/contact", function () {
+      var el = contactForm.elements;
+      return {
+        name: el.name.value.trim(),
+        email: el.email.value.trim(),
+        topic: el.topic.value,
+        message: el.message.value.trim(),
+        website: el.website.value
+      };
+    }, "Thanks, your message is on its way. We'll reply by email.");
+  }
 })();

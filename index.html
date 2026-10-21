@@ -10,9 +10,7 @@
 <link rel="icon" href="assets/favicon-32.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+JP:wght@500&family=Noto+Sans+Hebrew:wght@500&family=Noto+Sans+Arabic:wght@500&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -126,7 +124,20 @@
 
       <p class="platform-note reveal">Launching on iOS first — Android to follow.</p>
 
-      <a href="mailto:hello@eduneko.eu?subject=Notify%20me%20about%20Gliff&body=I'd%20like%20to%20be%20notified%20when%20Gliff%20launches." class="btn btn-primary btn-on-dark reveal">Get notified</a>
+      <!-- Waitlist signup with double opt-in via the API (see js/main.js). If the API can't be
+           reached, the status line offers the mailto link in data-fallback instead. -->
+      <form class="notify-form reveal" data-signup="gliff" data-fallback="mailto:hello@eduneko.eu?subject=Notify%20me%20about%20Gliff&amp;body=I'd%20like%20to%20be%20notified%20when%20Gliff%20launches." novalidate>
+        <div class="notify-row">
+          <label class="sr-only" for="gliff-email">Email address</label>
+          <input id="gliff-email" name="email" type="email" required autocomplete="email" placeholder="your@email.com">
+          <button type="submit" class="btn btn-primary btn-on-dark">Get notified</button>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label>Leave this empty <input name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <p class="form-note">We'll email you a link to confirm. One email at launch, no spam. <a href="privacy/">Privacy</a></p>
+        <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+      </form>
     </div>
   </section>
 
@@ -135,6 +146,41 @@
       <h2 class="reveal">Let's talk</h2>
       <p class="section-intro reveal">Training for your team, a content project, or just curious about Gliff — reach out.</p>
       <a class="contact-email reveal" href="mailto:hello@eduneko.eu">hello@eduneko.eu</a>
+
+      <!-- Contact form: stored and forwarded to hello@eduneko.eu by the API (see js/main.js). -->
+      <form class="contact-form reveal" data-contact data-fallback="mailto:hello@eduneko.eu" novalidate>
+        <p class="contact-or">or send us a message</p>
+        <div class="form-grid">
+          <label class="field">
+            <span>Name</span>
+            <input name="name" required autocomplete="name" maxlength="120">
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input name="email" type="email" required autocomplete="email">
+          </label>
+        </div>
+        <label class="field">
+          <span>About</span>
+          <select name="topic">
+            <option value="training">Training for my team</option>
+            <option value="content">A content project</option>
+            <option value="gliff">Gliff</option>
+            <option value="edunotes">EduNotes</option>
+            <option value="other">Something else</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Message</span>
+          <textarea name="message" rows="5" required minlength="10" maxlength="5000"></textarea>
+        </label>
+        <div class="hp" aria-hidden="true">
+          <label>Leave this empty <input name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p class="form-note">We use your details only to reply. <a href="privacy/">Privacy</a></p>
+        <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+      </form>
     </div>
   </section>
 
@@ -154,7 +200,7 @@
     </address>
   </div>
   <div class="wrap">
-    <p class="footer-meta">&copy; <span id="year">2026</span> EduNeko O&Uuml;. All rights reserved.</p>
+    <p class="footer-meta">&copy; <span id="year">2026</span> EduNeko O&Uuml;. All rights reserved. &middot; <a href="privacy/">Privacy</a></p>
   </div>
 </footer>
 

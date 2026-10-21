@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduNotes Beta Testing</title>
+<meta name="description" content="Guide for EduNotes beta testers: install via TestFlight, run your assigned test cards, and report problems.">
+<!-- Invite-only page: keep it out of search results. -->
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+
+<link rel="icon" href="../assets/favicon.ico" sizes="48x48">
+<link rel="icon" href="../assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+</head>
+
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- ============ Header ============ -->
+<header class="site-header glass">
+  <div class="shell header-row">
+    <a href="#top" class="brand-link">
+      <img src="../assets/logo.png" width="931" height="478" alt="" aria-hidden="true" class="brand-mark">
+      <span class="wordmark">EduNotes <span class="wordmark-sub">Beta</span></span>
+    </a>
+    <nav class="header-nav" aria-label="Sections">
+      <a href="#cards">Test cards</a>
+      <a href="#report">Report a problem</a>
+      <a href="#checkin">Weekly check-in</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Welcome ============ -->
+  <section id="top" class="section hero">
+    <div class="shell narrow center">
+      <span class="eyebrow">Private beta · TestFlight</span>
+      <h1 class="display">Thanks for testing EduNotes.</h1>
+      <p class="lead">Your job this beta is simple: use EduNotes the way you really teach, study, or present, and tell us whenever it lets you down. Passing results matter too. They tell us what's already solid.</p>
+
+      <!-- Filled in by js/main.js from the tester's invite link. -->
+      <p class="tester-status" data-tester-status hidden></p>
+    </div>
+  </section>
+
+  <!-- ============ Before you start ============ -->
+  <section class="section tinted" aria-labelledby="before-heading">
+    <div class="shell">
+      <h2 id="before-heading" class="h2">Before you start</h2>
+
+      <div class="grid three">
+        <div class="panel">
+          <h3 class="h3">1. Install</h3>
+          <ol class="steps">
+            <li>Install <a href="https://apps.apple.com/app/testflight/id899247664">TestFlight</a> from the App Store on each device you'll test on.</li>
+            <li>Open the TestFlight invitation email from Apple <strong>on that device</strong> and tap <em>View in TestFlight</em>.</li>
+            <li>Accept, then install EduNotes. Turn on automatic updates so you're always on the current build.</li>
+          </ol>
+          <p class="fine">School-managed devices or school Apple Accounts may block TestFlight or AirPlay. If that happens, tell us. It's useful to know.</p>
+        </div>
+
+        <div class="panel callout">
+          <h3 class="h3">2. Protect your work</h3>
+          <ul class="ticks">
+            <li>Work on <strong>copies</strong> of your documents, never your only version.</li>
+            <li>Keep <strong>backups</strong> of anything you annotate during the beta.</li>
+            <li>Have a <strong>fallback</strong> ready when presenting to a real audience.</li>
+            <li>Never include <strong>student names or sensitive documents</strong> in feedback. If we need a file, we'll arrange a private transfer.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3 class="h3">3. Your week</h3>
+          <ul class="ticks">
+            <li>Two guided sessions of 20–30 minutes, following your assigned test cards.</li>
+            <li>At least one ordinary study or teaching session, used your normal way.</li>
+            <li>A short check-in at the end of the week.</li>
+          </ul>
+          <p class="fine">Find your build number in TestFlight under EduNotes, for example <code>1.0 (42)</code>. Every report needs it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ What's being tested ============ -->
+  <section class="section" aria-labelledby="focus-heading">
+    <div class="shell">
+      <h2 id="focus-heading" class="h2">What matters most</h2>
+      <p class="section-lead">Report these right away, even if they only happened once.</p>
+
+      <div class="grid four">
+        <div class="focus">
+          <h3 class="h3">Your work survives</h3>
+          <p>Ink is still there after closing, reopening, interruptions, and syncing. Original documents never change.</p>
+        </div>
+        <div class="focus">
+          <h3 class="h3">Writing feels immediate</h3>
+          <p>No lag, missing strokes, or ink landing in the wrong place, even after long sessions.</p>
+        </div>
+        <div class="focus">
+          <h3 class="h3">Presenting is dependable</h3>
+          <p>The audience screen shows the right page with live ink and none of your controls, wired or AirPlay.</p>
+        </div>
+        <div class="focus">
+          <h3 class="h3">Big documents stay usable</h3>
+          <p>Files of hundreds of MB import with visible progress and stay responsive to navigate and annotate.</p>
+        </div>
+      </div>
+
+      <div class="panel languages">
+        <h3 class="h3">Using EduNotes in another language?</h3>
+        <p>EduNotes is translated into <strong>English, Italian, Portuguese, Japanese, and Russian</strong>, and every translation needs review by native readers. If you read one of these languages, please use the app in it for at least part of the week. Flag anything clipped, cut off, awkward, or misleading in toolbars, dialogs, errors, and onboarding. Report it like any other problem, for example <code>[S3] [Localization-IT] "Esporta" button text clipped on iPhone</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Your setup ============ -->
+  <section class="section tinted" id="setup" aria-labelledby="setup-heading">
+    <div class="shell narrow">
+      <h2 id="setup-heading" class="h2">Your setup</h2>
+      <p class="section-lead">Filled in once, attached to every card you send. It's remembered on this device, so update it whenever you switch device or build.</p>
+
+      <form class="panel form-grid" data-setup novalidate>
+        <label class="field">
+          <span>Build <em>required</em></span>
+          <input name="build" required placeholder="1.0 (42)" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>Device model <em>required</em></span>
+          <input name="device" required placeholder="iPad Air 11-inch (M2)" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>OS version <em>required</em></span>
+          <input name="os" required placeholder="iPadOS 26.1" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>Apple Pencil</span>
+          <input name="pencil" placeholder="Pencil Pro, USB-C, none…" autocomplete="off">
+        </label>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ Test cards ============
+       Each <li data-item> becomes a row with Pass / Fail / Blocked / Not tested
+       controls (js/main.js). Item ids are what the API stores. Keep them stable once
+       results exist, and add new ids rather than renumbering. -->
+  <section class="section" id="cards" aria-labelledby="cards-heading">
+    <div class="shell narrow">
+      <h2 id="cards-heading" class="h2">Test cards</h2>
+      <p class="section-lead">You'll be assigned one or two cards per build. Work through each line and mark it, then send the card. <strong>Use disposable copies</strong> for anything that interrupts saving or syncing. Your progress is saved on this device as you go.</p>
+
+      <!-- Status key. Colours match the per-line controls (.status-group in css/style.css). -->
+      <div class="panel status-key">
+        <h3 class="h3">How to mark each line</h3>
+        <dl>
+          <div>
+            <dt><span class="chip pass">Pass</span></dt>
+            <dd>You did it and everything behaved as described.</dd>
+          </div>
+          <div>
+            <dt><span class="chip fail">Fail</span></dt>
+            <dd>You did it and EduNotes got it wrong: missing or misplaced ink, wrong content on the audience screen, a crash, noticeable lag, or a confusing result. Report it in TestFlight and add the feedback ID to the card.</dd>
+          </div>
+          <div>
+            <dt><span class="chip blocked">Blocked</span></dt>
+            <dd>You tried, but something else stopped you before you could tell whether this line works. For example, an earlier step failed, the app crashed on the way there, or your school network blocked AirPlay. Say what stopped you in the notes.</dd>
+          </div>
+          <div>
+            <dt><span class="chip untested">Not tested</span></dt>
+            <dd>You didn't try it: it doesn't apply to your device, you don't have the equipment, or you ran out of time. That's fine. It shows us where we need other testers.</dd>
+          </div>
+        </dl>
+        <p class="fine"><strong>Overall result:</strong> <em>Fail</em> if any line failed. Otherwise <em>Blocked</em> if you couldn't get far enough to judge the card. Otherwise <em>Pass</em>. Lines left unmarked are sent as <em>Not tested</em>.</p>
+      </div>
+
+      <!-- Card A -->
+      <details class="card" data-card="A">
+        <summary>
+          <span class="card-letter">A</span>
+          <span class="card-title">Large-document teaching session</span>
+          <span class="badge" data-assigned hidden>Assigned to you</span>
+        </summary>
+        <div class="card-body">
+          <p class="card-intro">Takes about 30–40 minutes. Use a representative large document: a scanned textbook or a long slide deck exported to PDF.</p>
+          <label class="field">
+            <span>Document used <em>size and page count</em></span>
+            <input data-field="document" placeholder="Biology textbook scan, 380 MB, 412 pages" autocomplete="off">
+          </label>
+          <ol class="checklist">
+            <li data-item="A1">Import the large document and note its size and page count.</li>
+            <li data-item="A2">Confirm there is visible progress or activity while it imports.</li>
+            <li data-item="A3">Navigate between distant pages, zoom, and rotate where supported.</li>
+            <li data-item="A4">Write continuously, erase, undo/redo, and switch tools.</li>
+            <li data-item="A5">Add dense ink to several pages and keep going for 20–30 minutes.</li>
+            <li data-item="A6">Close and reopen. Check that your annotations and position in the document are intact.</li>
+            <li data-item="A7">Export, then reopen on another platform. Check that the ink is complete and correctly aligned.</li>
+          </ol>
+          <div class="card-footer" data-card-footer></div>
+        </div>
+      </details>
+
+      <!-- Card B -->
+      <details class="card" data-card="B">
+        <summary>
+          <span class="card-letter">B</span>
+          <span class="card-title">Presentation</span>
+          <span class="badge" data-assigned hidden>Assigned to you</span>
+        </summary>
+        <div class="card-body">
+          <p class="card-intro">You'll need a projector, external display, or AirPlay receiver. Look at the audience display itself, not just your device.</p>
+          <label class="field">
+            <span>Display connection</span>
+            <input data-field="connection" placeholder="USB-C to HDMI, AirPlay to Apple TV 4K…" autocomplete="off">
+          </label>
+          <ol class="checklist">
+            <li data-item="B1">Connect wired or via AirPlay and start Presentation Mode.</li>
+            <li data-item="B2">On the audience display: correct page, correct orientation, no controls or private content visible.</li>
+            <li data-item="B3">Write, erase, change pages, and switch tools. The audience display follows each change.</li>
+            <li data-item="B4">Disconnect while writing, reconnect, and carry on.</li>
+            <li data-item="B5">Change the display's orientation or resolution, or switch to another display, if your equipment allows.</li>
+            <li data-item="B6">Lock and unlock, then background and return to EduNotes while presenting.</li>
+            <li data-item="B7">End the presentation. Normal editing works and all your ink is still there.</li>
+          </ol>
+          <div class="card-footer" data-card-footer></div>
+        </div>
+      </details>
+
+      <!-- Card C — held back until saving, recovery and sync-conflict behaviour are
+           defined. Do not enable it before then: testers cannot judge pass/fail without
+           a stated expected outcome. -->
+      <div class="card card-pending" data-card="C">
+        <div class="summary-static">
+          <span class="card-letter">C</span>
+          <span class="card-title">Persistence, offline use, and sync</span>
+          <span class="badge muted-badge">Coming soon</span>
+        </div>
+        <p class="card-intro">This card covers airplane-mode use, recovering from interruptions, and moving documents between devices with each sync method. We're finalising exactly what to expect in each case. It will appear here in a later week.</p>
+      </div>
+
+      <!-- Card D -->
+      <details class="card" data-card="D">
+        <summary>
+          <span class="card-letter">D</span>
+          <span class="card-title">Platform transitions</span>
+          <span class="badge" data-assigned hidden>Assigned to you</span>
+        </summary>
+        <div class="card-body">
+          <p class="card-intro">Run the group for the device you're on, plus the "All devices" group. Mark the other platforms' lines <em>Not tested</em>. Please don't fill your everyday device's storage to test low-storage behaviour; we cover that separately.</p>
+
+          <h4 class="h4">iPad</h4>
+          <ol class="checklist">
+            <li data-item="D1">Use Split View and Slide Over where supported, and the other available windowing modes.</li>
+            <li data-item="D2">Resize the window repeatedly and rotate the device.</li>
+            <li data-item="D3">Switch between Pencil and keyboard. Keyboard shortcuts and focus behave correctly.</li>
+            <li data-item="D4">Present while multitasking.</li>
+          </ol>
+
+          <h4 class="h4">Mac</h4>
+          <ol class="checklist">
+            <li data-item="D5">Resize windows and move in and out of full screen.</li>
+            <li data-item="D6">Use multiple windows if supported. Keyboard shortcuts and focus behave correctly.</li>
+            <li data-item="D7">Open and save through file dialogs.</li>
+            <li data-item="D8">Remove an external display while EduNotes is using it.</li>
+          </ol>
+
+          <h4 class="h4">iPhone</h4>
+          <ol class="checklist">
+            <li data-item="D9">All tools are reachable on the small screen, in both orientations.</li>
+            <li data-item="D10">Take an incoming call mid-session, then return.</li>
+            <li data-item="D11">Background and lock, then return.</li>
+            <li data-item="D12">Present to an external display.</li>
+          </ol>
+
+          <h4 class="h4">All devices</h4>
+          <ol class="checklist">
+            <li data-item="D13">Lose network mid-session. Failure messages are clear and retrying is safe.</li>
+            <li data-item="D14">Open a document from a file provider that is unavailable. The message is clear.</li>
+            <li data-item="D15">A long session of an hour or more stays stable.</li>
+          </ol>
+          <div class="card-footer" data-card-footer></div>
+        </div>
+      </details>
+
+      <!-- Card E -->
+      <details class="card" data-card="E">
+        <summary>
+          <span class="card-letter">E</span>
+          <span class="card-title">Accessibility and languages</span>
+          <span class="badge" data-assigned hidden>Assigned to you</span>
+        </summary>
+        <div class="card-body">
+          <p class="card-intro">Use the accessibility features you rely on day to day, and the languages you read natively. Mark the rest <em>Not tested</em>.</p>
+          <label class="field">
+            <span>Languages and accessibility features used</span>
+            <input data-field="document" placeholder="Japanese, VoiceOver, Larger Text" autocomplete="off">
+          </label>
+          <ol class="checklist">
+            <li data-item="E1">With VoiceOver, complete: import → annotate and choose tools → present → save.</li>
+            <li data-item="E2">Controls have sensible labels, focus moves in a logical order, and keyboard navigation works.</li>
+            <li data-item="E3">Contrast is comfortable to read throughout.</li>
+            <li data-item="E4">Larger Text and Reduce Motion are respected where supported.</li>
+            <li data-item="E5">In each language you read: toolbars, dialogs, errors, and onboarding read correctly with no clipped text.</li>
+            <li data-item="E6">Long filenames display sensibly in each language.</li>
+            <li data-item="E7">No misleading or unnatural terminology. Tell us the better wording in the notes.</li>
+          </ol>
+          <div class="card-footer" data-card-footer></div>
+        </div>
+      </details>
+
+      <!-- Regression checklist -->
+      <details class="card" data-card="R">
+        <summary>
+          <span class="card-letter">R</span>
+          <span class="card-title">Regression checklist</span>
+          <span class="badge" data-assigned hidden>Assigned to you</span>
+        </summary>
+        <div class="card-body">
+          <p class="card-intro">A quick pass across the core flows on a new build. Send one per build and device.</p>
+          <div class="field-row">
+            <label class="field">
+              <span>Document set</span>
+              <input data-field="document" placeholder="Sample pack + my lecture PDF" autocomplete="off">
+            </label>
+            <label class="field">
+              <span>Display connection</span>
+              <input data-field="connection" placeholder="AirPlay" autocomplete="off">
+            </label>
+            <label class="field">
+              <span>Sync method</span>
+              <input data-field="syncService" placeholder="iCloud, shared folder, EduNotes Sync" autocomplete="off">
+            </label>
+          </div>
+          <ol class="checklist">
+            <li data-item="R1">Import an image and a PDF.</li>
+            <li data-item="R2">Import a large PDF, with visible activity during import.</li>
+            <li data-item="R3">Write, erase, undo/redo, and switch tools.</li>
+            <li data-item="R4">Zoom and navigate without misplaced or missing ink.</li>
+            <li data-item="R5">Close and reopen. Your latest work is there.</li>
+            <li data-item="R6">Edit offline and reopen.</li>
+            <li data-item="R7">Export and import. Content and ink are intact.</li>
+            <li data-item="R8">Your sync method completes without missing work.</li>
+            <li data-item="R9">Presentation shows content and live ink, with no controls visible.</li>
+            <li data-item="R10">Disconnect and reconnect the display, then carry on.</li>
+            <li data-item="R11">Resizing, multitasking, and interruptions on your device.</li>
+            <li data-item="R12">Recheck anything that changed in this build and any bugs you reported earlier.</li>
+          </ol>
+          <div class="card-footer" data-card-footer></div>
+        </div>
+      </details>
+
+      <!-- Shared footer for every card, cloned into each [data-card-footer] by js/main.js. -->
+      <template id="card-footer">
+        <div class="field-row">
+          <fieldset class="field outcome">
+            <legend>Overall result</legend>
+            <label><input type="radio" name="outcome" value="pass"> Pass</label>
+            <label><input type="radio" name="outcome" value="fail"> Fail</label>
+            <label><input type="radio" name="outcome" value="blocked"> Blocked</label>
+          </fieldset>
+          <label class="field">
+            <span>TestFlight feedback or issue IDs</span>
+            <input data-field="issueIds" placeholder="Optional" autocomplete="off">
+          </label>
+        </div>
+        <label class="field">
+          <span>Notes</span>
+          <textarea data-field="notes" rows="3" placeholder="Anything that surprised you, failed, or felt slow. Include how often, e.g. 3 of 5 attempts."></textarea>
+        </label>
+        <div class="actions">
+          <button type="button" class="btn primary" data-action="send">Send results</button>
+          <button type="button" class="btn secondary" data-action="copy">Copy summary</button>
+          <button type="button" class="btn link" data-action="reset">Clear card</button>
+        </div>
+        <p class="form-status" role="status" aria-live="polite" data-status></p>
+      </template>
+    </div>
+  </section>
+
+  <!-- ============ Reporting ============ -->
+  <section class="section tinted" id="report" aria-labelledby="report-heading">
+    <div class="shell">
+      <h2 id="report-heading" class="h2">Reporting a problem</h2>
+      <p class="section-lead">Bugs go through <strong>TestFlight</strong>: take a screenshot in EduNotes and choose <em>Share Beta Feedback</em>, or open TestFlight → EduNotes → <em>Send Beta Feedback</em>. Test cards and check-ins go through this page.</p>
+
+      <div class="grid two">
+        <div class="panel">
+          <h3 class="h3">Start every report like this</h3>
+          <div class="format">
+            <code data-copy-source>[Severity] [Area] Short description</code>
+            <button type="button" class="btn secondary small" data-copy-format>Copy</button>
+          </div>
+          <p class="example">Example: <code>[S1] [AirPlay] Audience screen stops updating after reconnect</code></p>
+          <p class="fine">Areas: Ink, Tools, Presentation-Wired, AirPlay, Import, Export, Large-Document, Sync-iCloud, Sync-Folder, Sync-EduNotes, Accessibility, Localization-IT / PT / JA / RU / EN, UI.</p>
+
+          <h3 class="h3 spaced">Then include</h3>
+          <ul class="ticks">
+            <li>Build, device model, OS, and your Pencil and display connection if relevant.</li>
+            <li>What you did, what you expected, and what actually happened.</li>
+            <li>How often, for example "3 of 5 attempts".</li>
+            <li>Document size, page count, and whether it's scanned or densely annotated.</li>
+            <li>Sync method, network state, and roughly when it happened.</li>
+            <li>Whether you lost work, and whether reopening helped.</li>
+            <li>A screenshot or screen recording if it's safe to share. For writing lag, a phone video of your hand and the screen together is ideal.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3 class="h3">How serious is it?</h3>
+          <p class="fine">Not sure? Just describe what it cost you and we'll set the severity.</p>
+          <dl class="severity">
+            <div><dt><span class="sev s0">S0</span> Critical</dt><dd>You lost work, a document was damaged, sync overwrote something without asking, or private content appeared on the audience screen.</dd></div>
+            <div><dt><span class="sev s1">S1</span> High</dt><dd>You couldn't finish a core task, the app crashed repeatedly, a presentation failed, or writing lagged noticeably.</dd></div>
+            <div><dt><span class="sev s2">S2</span> Medium</dt><dd>A real problem, but you found a way around it.</dd></div>
+            <div><dt><span class="sev s3">S3</span> Low</dt><dd>Cosmetic or a minor annoyance, such as clipped text or an odd translation.</dd></div>
+          </dl>
+          <p class="fine">For S0 problems, stop using that document and keep the copy as it is. We may ask for it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Weekly check-in ============ -->
+  <section class="section" id="checkin" aria-labelledby="checkin-heading">
+    <div class="shell narrow">
+      <h2 id="checkin-heading" class="h2">Weekly check-in</h2>
+      <p class="section-lead">Two minutes at the end of each week. Quiet weeks count. Tell us if you didn't get to test.</p>
+
+      <form class="panel" data-checkin novalidate>
+        <div class="field-row">
+          <label class="field">
+            <span>Guided sessions this week</span>
+            <input name="guidedSessions" type="number" min="0" max="50" value="0" inputmode="numeric">
+          </label>
+          <fieldset class="field outcome">
+            <legend>Used EduNotes for normal work?</legend>
+            <label><input type="radio" name="normalUse" value="true"> Yes</label>
+            <label><input type="radio" name="normalUse" value="false"> No</label>
+          </fieldset>
+        </div>
+        <label class="field">
+          <span>Anything that stopped you testing?</span>
+          <textarea name="blockers" rows="2" placeholder="No time, couldn't get AirPlay working at school, build expired…"></textarea>
+        </label>
+        <label class="field">
+          <span>Anything else</span>
+          <textarea name="notes" rows="3" placeholder="What felt good, what felt off, what you'd want before using it for real."></textarea>
+        </label>
+        <div class="actions">
+          <button type="submit" class="btn primary">Send check-in</button>
+        </div>
+        <p class="form-status" role="status" aria-live="polite" data-status></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="site-footer">
+  <div class="shell">
+    <div class="narrow center">
+      <h2 class="h2 on-dark">Thank you for helping make EduNotes trustworthy.</h2>
+      <p class="footer-lead">Questions about the beta? Write to <a href="mailto:hello@eduneko.eu">hello@eduneko.eu</a>.</p>
+    </div>
+    <div class="footer-meta">
+      <p>Results you send are stored with your tester ID and used only to improve EduNotes. Please keep this page and your personal link to yourself. <a href="../../privacy/">Privacy</a></p>
+      <p>Copyright 2026 EduNotes.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+/* ---------- Base ---------- */
+html { scroll-behavior: smooth; }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- Utilities ---------- */
+/* Glassmorphic sticky header surface. */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+/* Apple-style display tracking for headlines and the wordmark. */
+.tracking-tighter-display { letter-spacing: -0.022em; }
+
+/* ---------- Hero carousel ---------- */
+[data-carousel-track] {
+  transition: transform 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
+[data-carousel-dot] {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(29, 29, 31, 0.25);
+  transition: width 250ms ease, background-color 250ms ease;
+}
+
+[data-carousel-dot][aria-current="true"] {
+  width: 22px;
+  background: #1034A6;
+}
+
+[data-carousel-dot]:focus-visible {
+  outline: 2px solid #1034A6;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-carousel-track],
+  [data-carousel-dot] { transition: none; }
+}
+
+/* Carousel controls stay out of the way: the screenshots are the point, and a
+   permanent arrow/dot overlay reads as part of the app UI being shown. They fade
+   in on hover, and on keyboard focus so they remain reachable without a mouse. */
+[data-carousel-prev],
+[data-carousel-next],
+[data-carousel-dots] {
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+[data-carousel]:hover [data-carousel-prev],
+[data-carousel]:hover [data-carousel-next],
+[data-carousel]:hover [data-carousel-dots],
+[data-carousel]:focus-within [data-carousel-prev],
+[data-carousel]:focus-within [data-carousel-next],
+[data-carousel]:focus-within [data-carousel-dots] {
+  opacity: 1;
+}
+
+/* Touch devices have no cursor to hover with — leave the controls on. */
+@media (hover: none) {
+  [data-carousel-prev],
+  [data-carousel-next],
+  [data-carousel-dots] { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-carousel-prev],
+  [data-carousel-next],
+  [data-carousel-dots] { transition: none; }
+}
+
+/* ---------- Signup status line ---------- */
+/* Error colours have no Tailwind token; they appear only here. */
+[data-form-status][data-kind="error"] { color: #B42318; }
+footer [data-form-status][data-kind="error"] { color: #FFB4A9; }

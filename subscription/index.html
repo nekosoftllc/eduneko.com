@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your subscription — Eduneko</title>
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" href="../assets/favicon-32.png" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+
+<link rel="preload" href="../assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header is-scrolled">
+  <div class="wrap header-inner">
+    <a class="brand" href="../">
+      <img src="../assets/logo-mark.png" alt="" class="brand-mark" width="36" height="36">
+      <span class="brand-name">eduneko</span>
+    </a>
+  </div>
+</header>
+
+<!-- Confirm and unsubscribe links from waitlist emails land here:
+       ?confirm=<token>              confirm a pending signup
+       ?unsubscribe=<id>&sig=<sig>   leave a waitlist
+     Both act only on a button press (js/subscription.js), never on page load, so email
+     security scanners that open links can't confirm or unsubscribe anyone. -->
+<main id="main" class="section">
+  <div class="wrap page-narrow">
+    <h1 data-title>Your subscription</h1>
+    <p class="section-intro" data-message>This page confirms or cancels waitlist signups from our emails. The link you followed seems to be incomplete. Try opening it from the email again.</p>
+    <button type="button" class="btn btn-primary" data-action hidden></button>
+    <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+    <p data-next hidden><a href="../">Back to eduneko.com</a></p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-meta">&copy; EduNeko O&Uuml;. &middot; <a href="../privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="../js/subscription.js"></script>
+</body>
+</html>
