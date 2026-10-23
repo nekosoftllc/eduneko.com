@@ -42,10 +42,26 @@
     <div class="shell narrow center">
       <span class="eyebrow">Private beta · TestFlight</span>
       <h1 class="display">Thanks for testing EduNotes.</h1>
-      <p class="lead">Your job this beta is simple: use EduNotes the way you really teach, study, or present, and tell us whenever it lets you down. Passing results matter too. They tell us what's already solid.</p>
+      <p class="lead">What I would like from you in this beta is simple: use <a href="https://eduneko.com/edunotes">EduNotes</a> the way you really teach, study, or present, and tell me whenever it lets you down. Telling me what works and what you like matters a lot too. It tells me what's already solid and which direction to keep following.</p>
+      <p class="lead">I have provided <a href="#cards">test cards</a> to make the process easier for you. However, if they don't help you, it is also enough to just fill in the <a href="#checkin">weekly check-in</a> form with your comments or the use the feedback feature in Testflight for bugs.</p>
 
-      <!-- Filled in by js/main.js from the tester's invite link. -->
-      <p class="tester-status" data-tester-status hidden></p>
+      <!-- Tester code, from the ?t= invite link or typed in here (js/main.js). Both parts
+           start hidden: without JS there is nothing to send results with. -->
+      <div class="tester-code">
+        <form class="code-form" data-code-form hidden novalidate>
+          <label for="tester-code">Your tester code</label>
+          <div class="code-row">
+            <input id="tester-code" name="code" required autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste the code or link from your invitation">
+            <button type="submit" class="btn primary">Save code</button>
+          </div>
+        </form>
+        <div class="code-current" data-code-current hidden>
+          <span>Tester code</span>
+          <code data-code-value></code>
+          <button type="button" class="btn link" data-code-reset>Change code</button>
+        </div>
+        <p class="tester-status" data-tester-status role="status" aria-live="polite" hidden></p>
+      </div>
     </div>
   </section>
 
@@ -62,27 +78,28 @@
             <li>Open the TestFlight invitation email from Apple <strong>on that device</strong> and tap <em>View in TestFlight</em>.</li>
             <li>Accept, then install EduNotes. Turn on automatic updates so you're always on the current build.</li>
           </ol>
-          <p class="fine">School-managed devices or school Apple Accounts may block TestFlight or AirPlay. If that happens, tell us. It's useful to know.</p>
+          <p class="fine">Find your version and build number in TestFlight, for example <code>1.0 (42)</code>.</p>
         </div>
 
         <div class="panel callout">
           <h3 class="h3">2. Protect your work</h3>
           <ul class="ticks">
             <li>Work on <strong>copies</strong> of your documents, never your only version.</li>
-            <li>Keep <strong>backups</strong> of anything you annotate during the beta.</li>
+            <li>Keep <strong>backups</strong> of anything you annotate during the beta by exporting it from the app.</li>
             <li>Have a <strong>fallback</strong> ready when presenting to a real audience.</li>
-            <li>Never include <strong>student names or sensitive documents</strong> in feedback. If we need a file, we'll arrange a private transfer.</li>
           </ul>
+          <p class="fine">Version and build number are also found in the app settings in the <em>About</em> section under <em>Version</em> and <em>Build</em>.</p>
         </div>
 
         <div class="panel">
           <h3 class="h3">3. Your week</h3>
+          Ideally, if you can, aim for:
           <ul class="ticks">
-            <li>Two guided sessions of 20–30 minutes, following your assigned test cards.</li>
+            <li>A couple of guided sessions of 10–20 minutes, following test cards.</li>
             <li>At least one ordinary study or teaching session, used your normal way.</li>
             <li>A short check-in at the end of the week.</li>
           </ul>
-          <p class="fine">Find your build number in TestFlight under EduNotes, for example <code>1.0 (42)</code>. Every report needs it.</p>
+          <p class="fine">Please always include the version and build number from either TestFlight or the app settings. Every report needs them.</p>
         </div>
       </div>
     </div>
@@ -92,7 +109,7 @@
   <section class="section" aria-labelledby="focus-heading">
     <div class="shell">
       <h2 id="focus-heading" class="h2">What matters most</h2>
-      <p class="section-lead">Report these right away, even if they only happened once.</p>
+      <p class="section-lead">Report failures in any of these areas right away, even if they only happened once.</p>
 
       <div class="grid four">
         <div class="focus">
@@ -105,7 +122,7 @@
         </div>
         <div class="focus">
           <h3 class="h3">Presenting is dependable</h3>
-          <p>The audience screen shows the right page with live ink and none of your controls, wired or AirPlay.</p>
+          <p>The audience screen shows the right page with live ink and none of your controls, whether wired or with AirPlay.</p>
         </div>
         <div class="focus">
           <h3 class="h3">Big documents stay usable</h3>
@@ -115,7 +132,8 @@
 
       <div class="panel languages">
         <h3 class="h3">Using EduNotes in another language?</h3>
-        <p>EduNotes is translated into <strong>English, Italian, Portuguese, Japanese, and Russian</strong>, and every translation needs review by native readers. If you read one of these languages, please use the app in it for at least part of the week. Flag anything clipped, cut off, awkward, or misleading in toolbars, dialogs, errors, and onboarding. Report it like any other problem, for example <code>[S3] [Localization-IT] "Esporta" button text clipped on iPhone</code>.</p>
+        <p>EduNotes is translated into <strong>English</strong>, <strong>Italian</strong>, <strong>Portuguese</strong>, <strong>Japanese</strong>, and <strong>Russian</strong>, but I am only a native speaker of Italian, so I'd like a review by native readers of the other languages, as well as a second eye for typos and omissions.</p>
+        <p>If you are a native or fluent speaker of one of these languages, please use the app in that language for at least some of the time. Flag anything clipped, cut off, awkward, or misleading in toolbars, dialogs, errors, and onboarding. <a href="#report">Report it</a> like any other problem, for example <code>[S3] [Localization-IT] "Esporta" button text clipped on iPhone</code>.</p>
       </div>
     </div>
   </section>
@@ -232,17 +250,71 @@
         </div>
       </details>
 
-      <!-- Card C — held back until saving, recovery and sync-conflict behaviour are
-           defined. Do not enable it before then: testers cannot judge pass/fail without
-           a stated expected outcome. -->
-      <div class="card card-pending" data-card="C">
-        <div class="summary-static">
+      <!-- Card C. Expected outcomes follow the app's actual behaviour: autosave 1 s after
+           the last edit, closing saves immediately, sync is manual only, offline edits on two
+           devices merge into one document. If any of that changes, update the lines here. -->
+      <details class="card" data-card="C">
+        <summary>
           <span class="card-letter">C</span>
           <span class="card-title">Persistence, offline use, and sync</span>
-          <span class="badge muted-badge">Coming soon</span>
+          <span class="badge" data-assigned hidden>Assigned to you</span>
+        </summary>
+        <div class="card-body">
+          <p class="card-intro"><strong>Use disposable documents only.</strong> The first group needs one device. The sync groups need two, signed in to the same sync method. Mark the methods you can't use <em>Not tested</em>. Force-quitting is enough: please don't try to crash the app or your device.</p>
+          <label class="field">
+            <span>Sync methods and devices</span>
+            <input data-field="syncService" placeholder="iCloud and Shared Folder (Dropbox), iPad Air ↔ MacBook Air" autocomplete="off">
+          </label>
+
+          <h4 class="h4">How saving and sync work</h4>
+          <ul class="ticks">
+            <li>EduNotes saves automatically about a second after you stop writing, and straight away when you close a document. There is no Save button.</li>
+            <li>Sync only runs when you ask: pull down on the document list on iPad and iPhone, or press <kbd>⌘R</kbd> (or <em>Sync Now</em>) on the Mac. Wait for the result message, such as "Sent 3 changes", before syncing the other device.</li>
+            <li><strong>iCloud</strong> and <strong>EduNotes Server</strong>: a change should arrive on the other device's first sync. <strong>Shared Folder</strong>: your cloud service finishes the upload in the background, so wait about 2 minutes before syncing the other device. It's a <em>Fail</em> if the change hasn't arrived after two syncs (about 5 minutes for a shared folder).</li>
+            <li>A document can appear on the other device as <em>Downloading…</em> before its contents arrive. That's expected.</li>
+          </ul>
+
+          <h4 class="h4">Saving and offline (one device)</h4>
+          <ol class="checklist">
+            <li data-item="C1">In airplane mode: import a PDF, annotate it, close and reopen it, and export it. Everything works and nothing looks different offline.</li>
+            <li data-item="C2">Still in airplane mode, start a sync. You get a clear failure message and the document is unchanged.</li>
+            <li data-item="C3">Write, pause for a couple of seconds, then force-quit and reopen. All your ink is there, on the page and with the tool you left.</li>
+            <li data-item="C4">Write and close the document straight away, without pausing. Reopen it. All your ink is there.</li>
+            <li data-item="C5">Force-quit while you're in the middle of writing, then reopen. At most the last second or two of writing is missing, and the document opens normally.</li>
+            <li data-item="C6">Find the PDF you imported in its original location (Files or Finder) and open it. It's unchanged, with none of your ink in it.</li>
+          </ol>
+
+          <h4 class="h4">iCloud</h4>
+          <ol class="checklist">
+            <li data-item="C7">Edit on device A and sync, then sync on B and open it. Edit on B and sync, then sync on A. Both devices show both edits, and the document appears once.</li>
+            <li data-item="C8">Put both devices in airplane mode and add different ink to the same page on each. Reconnect, then sync A, B, and A again. Both devices show all the ink from both, in a single document.</li>
+            <li data-item="C9">Start syncing a large document and turn on airplane mode before it finishes. Reconnect and sync again. The document appears once, with the same title and all its ink.</li>
+          </ol>
+
+          <h4 class="h4">Shared Folder</h4>
+          <ol class="checklist">
+            <li data-item="C10">Edit on device A and sync, then sync on B and open it. Edit on B and sync, then sync on A. Both devices show both edits, and the document appears once.</li>
+            <li data-item="C11">Put both devices in airplane mode and add different ink to the same page on each. Reconnect, then sync A, B, and A again. Both devices show all the ink from both, in a single document.</li>
+            <li data-item="C12">Start syncing a large document and turn on airplane mode before it finishes. Reconnect and sync again. The document appears once, with the same title and all its ink.</li>
+          </ol>
+
+          <h4 class="h4">EduNotes Server</h4>
+          <ol class="checklist">
+            <li data-item="C13">Edit on device A and sync, then sync on B and open it. Edit on B and sync, then sync on A. Both devices show both edits, and the document appears once.</li>
+            <li data-item="C14">Put both devices in airplane mode and add different ink to the same page on each. Reconnect, then sync A, B, and A again. Both devices show all the ink from both, in a single document.</li>
+            <li data-item="C15">Start syncing a large document and turn on airplane mode before it finishes. Reconnect and sync again. The document appears once, with the same title and all its ink.</li>
+          </ol>
+
+          <h4 class="h4">When both devices changed the same thing</h4>
+          <ul class="ticks">
+            <li>New ink and new pages from both devices are always kept. You're never asked to choose.</li>
+            <li>The same mark moved or recoloured on both: the more recent change wins. Erased on one, edited on the other: the erase wins. Renamed on both: one name wins.</li>
+            <li><strong>Known issue:</strong> if both devices edit the same page's presenter note, one version of the note is lost. There's no need to report it.</li>
+            <li>Expected extra documents: <em>"Name (Conflicted Copy)"</em> after <em>Reset Sync State…</em>, <em>"Name copy"</em> after opening the same <code>.edunote</code> file twice, and two documents with the same title if you imported the same PDF separately on each device. Any other duplicate, especially <em>"Name 2"</em> after a sync, is a <em>Fail</em>.</li>
+          </ul>
+          <div class="card-footer" data-card-footer></div>
         </div>
-        <p class="card-intro">This card covers airplane-mode use, recovering from interruptions, and moving documents between devices with each sync method. We're finalising exactly what to expect in each case. It will appear here in a later week.</p>
-      </div>
+      </details>
 
       <!-- Card D -->
       <details class="card" data-card="D">
@@ -334,7 +406,7 @@
             </label>
             <label class="field">
               <span>Sync method</span>
-              <input data-field="syncService" placeholder="iCloud, shared folder, EduNotes Sync" autocomplete="off">
+              <input data-field="syncService" placeholder="iCloud, Shared Folder, EduNotes Server" autocomplete="off">
             </label>
           </div>
           <ol class="checklist">
@@ -393,13 +465,60 @@
         <div class="panel">
           <h3 class="h3">Start every report like this</h3>
           <div class="format">
-            <code data-copy-source>[Severity] [Area] Short description</code>
-            <button type="button" class="btn secondary small" data-copy-format>Copy</button>
+            <code>[Severity] [Area] Short description</code>
           </div>
-          <p class="example">Example: <code>[S1] [AirPlay] Audience screen stops updating after reconnect</code></p>
-          <p class="fine">Areas: Ink, Tools, Presentation-Wired, AirPlay, Import, Export, Large-Document, Sync-iCloud, Sync-Folder, Sync-EduNotes, Accessibility, Localization-IT / PT / JA / RU / EN, UI.</p>
 
-          <h3 class="h3 spaced">Then include</h3>
+          <!-- Shown by JS, which builds the line from these fields. -->
+          <form class="report-builder" data-report-builder hidden>
+            <div class="field-row">
+              <label class="field">
+                <span>Severity</span>
+                <select name="severity">
+                  <option value="S?">Not sure</option>
+                  <option value="S0">S0 Critical</option>
+                  <option value="S1">S1 High</option>
+                  <option value="S2">S2 Medium</option>
+                  <option value="S3">S3 Low</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Area</span>
+                <select name="area">
+                  <option value="Other">Not sure</option>
+                  <option>Ink</option>
+                  <option>Tools</option>
+                  <option>Presentation-Wired</option>
+                  <option>AirPlay</option>
+                  <option>Import</option>
+                  <option>Export</option>
+                  <option>Large-Document</option>
+                  <option>Sync-iCloud</option>
+                  <option>Sync-Folder</option>
+                  <option>Sync-Server</option>
+                  <option>Accessibility</option>
+                  <option>Localization-IT</option>
+                  <option>Localization-PT</option>
+                  <option>Localization-JA</option>
+                  <option>Localization-RU</option>
+                  <option>Localization-EN</option>
+                  <option>UI</option>
+                </select>
+              </label>
+            </div>
+            <label class="field">
+              <span>Short description</span>
+              <input name="description" type="text" maxlength="120" autocomplete="off" placeholder="A short description of the issue or problem">
+            </label>
+            <div class="format">
+              <output name="line" aria-live="polite"><code>[S?] [Other] Short description</code></output>
+              <button type="submit" class="btn secondary small">Copy</button>
+            </div>
+            <p class="form-status" role="status" aria-live="polite" data-status></p>
+          </form>
+
+          <p class="example">Example: <code>[S1] [AirPlay] Audience screen stops updating after reconnect</code></p>
+
+          <h3 class="h3 spaced">Then include, where applicable</h3>
           <ul class="ticks">
             <li>Build, device model, OS, and your Pencil and display connection if relevant.</li>
             <li>What you did, what you expected, and what actually happened.</li>

@@ -46,7 +46,9 @@
       <div class="mx-auto max-w-3xl text-center">
         <span class="inline-block rounded-2xl bg-brand-tint px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-brand">Coming soon to Apple platforms</span>
 
-        <h1 class="tracking-tighter-display mt-7 text-[40px] font-semibold leading-[1.06] md:text-[64px]">The canvas for clear explanations is almost here.</h1>
+        <!-- The last word crossfades between the stacked words (see js/main.js). Screen readers
+             get the sr-only sentence instead of a word that changes under them. -->
+        <h1 class="tracking-tighter-display mt-7 text-[40px] font-semibold leading-[1.06] md:text-[64px]">The canvas for clear <span class="sr-only">explanations and presentations</span><span data-rotator aria-hidden="true"><span aria-current="true">explanations</span><span>presentations</span></span> is almost here.</h1>
 
         <p class="mx-auto mt-6 max-w-2xl text-[18px] leading-relaxed text-muted md:text-[20px]">EduNotes is the upcoming native workspace for teachers, trainers, speakers, and students. Annotate PDFs naturally with Apple Pencil and present pure, borderless content to any screen.</p>
 
@@ -282,6 +284,8 @@
         <a href="#" class="transition-colors hover:text-white">Platform Requirements</a>
         <span aria-hidden="true">&middot;</span>
         <a href="../#contact" class="transition-colors hover:text-white">Contact</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="testing/" class="transition-colors hover:text-white">Beta tester? Start here</a>
       </nav>
       <p>Copyright 2026 EduNotes.</p>
     </div>

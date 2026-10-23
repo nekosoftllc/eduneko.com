@@ -2,8 +2,10 @@
 
    Each tester gets a personal invite link: <page>?t=<token>. The token is moved into
    localStorage and stripped from the address bar, then sent as a Bearer token to the
-   feedback endpoints of the Eduneko API (services/api in this repo). Without a token the page still works
-   as a guide, and "Copy summary" lets results go out through TestFlight feedback.
+   feedback endpoints of the Eduneko API (services/api in this repo). Testers who arrive
+   without the link can type the code (or paste the whole link) into the code form, and
+   "Change code" clears it again. Without a token the page still works as a guide, and
+   "Copy summary" lets results go out through TestFlight feedback.
 
    Card progress and "Your setup" are kept in localStorage so a half-done card survives
    a reload. Storage can be unavailable (private mode, blocked site data), so every
@@ -71,14 +73,17 @@
   }
 
   function failureMessage(err) {
-    if (err.status === 401) return "Your invite link isn't valid any more. Open the latest link from your invitation email.";
+    if (err.status === 401) return "Your tester code isn't valid any more. Enter the code from your latest invitation email.";
     if (err.status === 400) return "Something in the form wasn't accepted: " + err.message;
     return "Couldn't reach the feedback service. Your answers are kept on this device. Try again later, or use Copy summary and paste it into TestFlight feedback.";
   }
 
-  // ---------- Tester status ----------
+  // ---------- Tester code and status ----------
 
   var statusEl = document.querySelector("[data-tester-status]");
+  var codeForm = document.querySelector("[data-code-form]");
+  var codeInput = codeForm.elements.code;
+  var codeCurrent = document.querySelector("[data-code-current]");
 
   function showTesterStatus(text, warn) {
     statusEl.textContent = text;
@@ -98,10 +103,25 @@
     if (first) first.open = true;
   }
 
-  if (!token) {
-    showTesterStatus("Open the personal link from your invitation email to send results. You can still read the cards and use Copy summary.", true);
-  } else {
+  function clearAssigned() {
+    Array.prototype.forEach.call(document.querySelectorAll("details.assigned"), function (card) {
+      card.classList.remove("assigned");
+      card.querySelector("[data-assigned]").hidden = true;
+    });
+  }
+
+  // Shows the form when there is no code, otherwise the code and its Change button.
+  function renderCode() {
+    codeForm.hidden = !!token;
+    codeCurrent.hidden = !token;
+    codeCurrent.querySelector("[data-code-value]").textContent = token || "";
+  }
+
+  function verifyToken() {
+    var checking = token;
+    showTesterStatus("Checking your tester code…");
     api("GET", "/me").then(function (me) {
+      if (token !== checking) return;
       var cards = me.cards || [];
       var who = me.name || me.id;
       showTesterStatus(
@@ -110,9 +130,56 @@
       );
       markAssigned(cards);
     }).catch(function (err) {
-      if (err.status === 401) store.remove("token");
+      if (token !== checking) return;
+      if (err.status === 401) {
+        setToken(null);
+        codeInput.value = checking;
+      }
       showTesterStatus(failureMessage(err), true);
     });
+  }
+
+  function setToken(value) {
+    token = value;
+    if (value) store.set("token", value); else store.remove("token");
+    clearAssigned();
+    renderCode();
+  }
+
+  // Accepts the bare code or the whole invite link, which carries it as ?t=.
+  function readCode(text) {
+    text = text.trim();
+    var match = /[?&]t=([^&#\s]+)/.exec(text);
+    if (match) text = decodeURIComponent(match[1]);
+    return /^[A-Za-z0-9_-]{16,}$/.test(text) ? text : null;
+  }
+
+  codeForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var code = readCode(codeInput.value);
+    if (!code) {
+      codeInput.setAttribute("aria-invalid", "true");
+      showTesterStatus("That doesn't look like a tester code. Copy it from your invitation email, or paste the whole link.", true);
+      codeInput.focus();
+      return;
+    }
+    codeInput.removeAttribute("aria-invalid");
+    codeInput.value = "";
+    setToken(code);
+    verifyToken();
+  });
+
+  codeCurrent.querySelector("[data-code-reset]").addEventListener("click", function () {
+    setToken(null);
+    showTesterStatus("Enter your tester code to send results. You can still read the cards and use Copy summary.", true);
+    codeInput.focus();
+  });
+
+  renderCode();
+  if (token) {
+    verifyToken();
+  } else {
+    showTesterStatus("Enter your tester code, or open the personal link from your invitation email, to send results. You can still read the cards and use Copy summary.", true);
   }
 
   // ---------- Your setup ----------
@@ -262,7 +329,7 @@
 
   function sendCard(card, letter, button, statusOut) {
     if (!token) {
-      setStatus(statusOut, "Open the personal link from your invitation email to send results, or use Copy summary.", "error");
+      setStatus(statusOut, "Enter your tester code at the top of the page to send results, or use Copy summary.", "error");
       return;
     }
     if (!requireSetup(statusOut)) return;
@@ -335,16 +402,37 @@
 
   // ---------- Report format ----------
 
-  var formatButton = document.querySelector("[data-copy-format]");
-  formatButton.addEventListener("click", function () {
-    var text = document.querySelector("[data-copy-source]").textContent;
-    var original = formatButton.textContent;
-    var done = function (label) {
-      formatButton.textContent = label;
-      setTimeout(function () { formatButton.textContent = original; }, 1500);
-    };
-    if (!navigator.clipboard) { done("Select to copy"); return; }
-    navigator.clipboard.writeText(text).then(function () { done("Copied"); }, function () { done("Select to copy"); });
+  // Builds the tester's own first line from severity, area and description. Without JS
+  // the form stays hidden and the generic format above it still reads as a guide.
+  var builder = document.querySelector("[data-report-builder]");
+  var builderStatus = builder.querySelector("[data-status]");
+  var builderLine = builder.querySelector("output code");
+
+  function reportLine() {
+    var f = builder.elements;
+    return "[" + f.severity.value + "] [" + (f.area.value || "Area") + "] " +
+      (f.description.value.trim() || "Short description");
+  }
+
+  builder.hidden = false;
+  builder.addEventListener("input", function (e) {
+    e.target.removeAttribute("aria-invalid");
+    builderLine.textContent = reportLine();
+    setStatus(builderStatus, "");
+  });
+  builder.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var missing = [builder.elements.area, builder.elements.description].filter(function (el) {
+      var empty = !el.value.trim();
+      if (empty) el.setAttribute("aria-invalid", "true");
+      return empty;
+    });
+    if (missing.length) {
+      setStatus(builderStatus, "Choose an area and add a short description first.", "error");
+      missing[0].focus();
+      return;
+    }
+    copyText(reportLine(), builderStatus, "Copied. Paste it as the first line of your TestFlight feedback.");
   });
 
   // ---------- Weekly check-in ----------
@@ -354,7 +442,7 @@
   checkin.addEventListener("submit", function (e) {
     e.preventDefault();
     if (!token) {
-      setStatus(checkinStatus, "Open the personal link from your invitation email to send a check-in.", "error");
+      setStatus(checkinStatus, "Enter your tester code at the top of the page to send a check-in.", "error");
       return;
     }
     if (!requireSetup(checkinStatus)) return;

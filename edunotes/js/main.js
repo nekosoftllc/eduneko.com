@@ -126,6 +126,48 @@ tailwind.config = {
   }
 })();
 
+/* Hero headline rotator.
+
+   Cycles the aria-current word inside [data-rotator]; the crossfade is a CSS opacity
+   transition. Skipped under reduced motion and paused while the tab is hidden. Without
+   JS the first word simply stays. */
+(function () {
+  var INTERVAL = 3000;
+
+  function setup(root) {
+    var words = root.children;
+    if (words.length < 2) return;
+    var index = 0;
+    var timer = null;
+
+    function step() {
+      words[index].setAttribute("aria-current", "false");
+      index = (index + 1) % words.length;
+      words[index].setAttribute("aria-current", "true");
+    }
+
+    function start() { if (!timer) timer = window.setInterval(step, INTERVAL); }
+    function stop() { window.clearInterval(timer); timer = null; }
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stop(); else start();
+    });
+    start();
+  }
+
+  function init() {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var roots = document.querySelectorAll("[data-rotator]");
+    for (var i = 0; i < roots.length; i++) setup(roots[i]);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+
 /* Hero carousel.
 
    Slides live side by side in a flex track; moving between them is a single

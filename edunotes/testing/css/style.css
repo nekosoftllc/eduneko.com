@@ -39,10 +39,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Let the hidden attribute win over component display rules such as .code-current. */
+[hidden] { display: none !important; }
+
 a { color: var(--brand); text-underline-offset: 2px; }
 a:hover { color: var(--brand-hover); }
 
-code {
+code, kbd {
   font-family: var(--mono);
   font-size: 0.88em;
   background: var(--brand-tint);
@@ -185,6 +188,18 @@ code {
 }
 .tester-status.warn { background: #FFF6E5; border-color: rgba(154, 91, 0, 0.25); }
 
+/* Tester code: the entry form when there is no code, otherwise the code and Change. */
+.tester-code { margin-top: 32px; }
+.tester-code .tester-status { margin-top: 16px; }
+.code-form { max-width: 520px; margin: 0 auto; }
+.code-form label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; }
+.code-row { display: flex; gap: 10px; }
+.code-row input { flex: 1; min-width: 0; }
+.code-row .btn { flex: none; }
+@media (max-width: 519px) { .code-row { flex-direction: column; } }
+.code-current { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 10px; font-size: 14px; color: var(--muted); }
+.code-current code { word-break: break-all; }
+
 /* ---------- Forms ---------- */
 .form-grid { display: grid; gap: 16px; margin-top: 28px; }
 @media (min-width: 640px) { .form-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -197,7 +212,7 @@ code {
 .field-row { display: grid; gap: 0 16px; }
 @media (min-width: 640px) { .field-row { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } }
 
-input:not([type="radio"]), textarea {
+input:not([type="radio"]), textarea, select {
   width: 100%;
   font: inherit;
   font-size: 15px;
@@ -208,8 +223,8 @@ input:not([type="radio"]), textarea {
   padding: 11px 14px;
 }
 input::placeholder, textarea::placeholder { color: rgba(110, 110, 115, 0.7); }
-input:focus, textarea:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-tint); }
-input[aria-invalid="true"] { border-color: var(--fail); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-tint); }
+input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--fail); }
 textarea { resize: vertical; }
 
 .outcome { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
@@ -369,6 +384,10 @@ input[type="radio"] { accent-color: var(--brand); width: 18px; height: 18px; mar
 .format { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px; }
 .format code { font-size: 15px; padding: 8px 12px; }
 .example { margin: 12px 0 0; font-size: 15px; }
+
+/* Report line builder: the tester's own first line, copied with one button. */
+.report-builder { margin-top: 20px; padding-top: 4px; border-top: 1px solid var(--hairline); }
+.report-builder .format code { word-break: break-word; }
 
 .severity { margin: 16px 0 0; }
 .severity div { padding: 14px 0; border-bottom: 1px solid var(--hairline); }
