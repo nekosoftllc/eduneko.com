@@ -35,12 +35,40 @@ tailwind.config = {
    (services/api, POST /signups). It is double opt-in, so success means "check your
    inbox for a confirmation link", shown in the form's [data-form-status] line. If the
    API can't be reached, the old behaviour takes over: a mailto: link pre-filled with
-   what they typed opens their mail application. */
+   what they typed opens their mail application.
+
+   The API scales to zero, so the first focus in a form wakes it, and a request that
+   fails while it is starting (network error or 502/503/504) is retried once before
+   falling back. */
 (function () {
   var LOCAL = location.hostname === "localhost" || location.hostname === "127.0.0.1";
   var API = LOCAL ? "http://localhost:8080" : "https://api.eduneko.cloud";
   var INBOX = "hello@eduneko.eu";
   var SUBJECT = "EduNotes early access request";
+  var RETRY_DELAY = 1500;
+  var WARM_EVERY = 5 * 60 * 1000;
+  var warmedAt = 0;
+
+  function warmUp() {
+    var now = Date.now();
+    if (now - warmedAt < WARM_EVERY) return;
+    warmedAt = now;
+    fetch(API + "/healthz", { mode: "no-cors" }).catch(function () { /* only a wake-up */ });
+  }
+
+  function retryable(res) {
+    return res.status === 502 || res.status === 503 || res.status === 504;
+  }
+
+  function postWithRetry(url, options) {
+    function send() { return fetch(url, options); }
+    function later() {
+      return new Promise(function (resolve) { setTimeout(resolve, RETRY_DELAY); }).then(send);
+    }
+    return send().then(function (res) {
+      return retryable(res) ? later() : res;
+    }, later);
+  }
 
   var ROLE_LABELS = {
     teacher: "Teacher / Educator",
@@ -64,6 +92,7 @@ tailwind.config = {
   }
 
   function wire(form) {
+    form.addEventListener("focusin", warmUp);
     form.addEventListener("submit", function (event) {
       event.preventDefault();
 
@@ -89,7 +118,7 @@ tailwind.config = {
 
       button.disabled = true;
       setStatus(form, "Sending…");
-      fetch(API + "/signups", {
+      postWithRetry(API + "/signups", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, product: "edunotes", role: role, website: honeypot ? honeypot.value : "" })

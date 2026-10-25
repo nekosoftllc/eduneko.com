@@ -73,7 +73,7 @@
     <h3>Security and abuse prevention</h3>
     <ul>
       <li>When you submit a form, our server uses your IP address briefly, in memory, to limit repeated submissions. Hidden form fields help us filter out automated spam. Neither is used to identify you.</li>
-      <li>Our server's request logs, which include IP addresses and browser details, are kept for 30 days to diagnose faults and abuse (legitimate interest, Art. 6(1)(f)).</li>
+      <li>Our server's request logs, which include IP addresses and browser details, are kept for 30 days to diagnose faults and abuse (legitimate interest, Art. 6(1)(f)). This covers every request to our server, including the wake-up request described below, even if you never submit anything.</li>
     </ul>
 
     <h3>Visiting the website</h3>
@@ -81,6 +81,7 @@
       <li>We don't use cookies, analytics, advertising, or tracking of any kind.</li>
       <li>The website is hosted on GitHub Pages. GitHub receives your IP address when your browser loads the site and may log it for security purposes.</li>
       <li>The fonts, images, and scripts on eduneko.com are served from our own site, so your browser doesn't contact Google or any other third party when you visit.</li>
+      <li>When you click or tab into a form (on the beta testers' page, into anything on the page), your browser sends a short request to our own server (api.eduneko.cloud) to wake it up, so that your submission doesn't fail while the server starts. The request carries nothing you have typed, and it only appears in the request logs described above.</li>
       <li>The EduNotes pages currently load their styling script from cdn.tailwindcss.com, which receives your IP address. <em>[Review: this goes away when the planned compiled stylesheet replaces the Tailwind CDN. Remove this item then.]</em></li>
     </ul>
 

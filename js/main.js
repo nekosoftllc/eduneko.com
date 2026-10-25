@@ -46,16 +46,40 @@
 
   /* Forms: Gliff waitlist (form[data-signup]) and contact (form[data-contact]) post to
      the Eduneko API. Signups are double opt-in: success means "check your inbox". If the
-     API is unreachable, the status line offers the form's data-fallback mailto link. */
+     API is unreachable, the status line offers the form's data-fallback mailto link.
+     The API scales to zero, so the first focus in a form wakes it, and a request that
+     fails while it is starting (network error or 502/503/504) is retried once. */
   var LOCAL = location.hostname === "localhost" || location.hostname === "127.0.0.1";
   var API = LOCAL ? "http://localhost:8080" : "https://api.eduneko.cloud";
+  var RETRY_DELAY = 1500;
+  var WARM_EVERY = 5 * 60 * 1000;
+  var warmedAt = 0;
+
+  function warmUp() {
+    var now = Date.now();
+    if (now - warmedAt < WARM_EVERY) return;
+    warmedAt = now;
+    fetch(API + "/healthz", { mode: "no-cors" }).catch(function () { /* only a wake-up */ });
+  }
+
+  function retryable(res) {
+    return res.status === 502 || res.status === 503 || res.status === 504;
+  }
 
   function postJSON(path, data) {
-    return fetch(API + path, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    }).then(function (res) {
+    function send() {
+      return fetch(API + path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    }
+    function later() {
+      return new Promise(function (resolve) { setTimeout(resolve, RETRY_DELAY); }).then(send);
+    }
+    return send().then(function (res) {
+      return retryable(res) ? later() : res;
+    }, later).then(function (res) {
       return res.json().catch(function () { return {}; }).then(function (body) {
         return { status: res.status, body: body };
       });
@@ -87,6 +111,7 @@
   }
 
   function wireForm(form, path, collect, success) {
+    form.addEventListener("focusin", warmUp);
     form.addEventListener("submit", function (event) {
       event.preventDefault();
       var fields = form.querySelectorAll("input, select, textarea");

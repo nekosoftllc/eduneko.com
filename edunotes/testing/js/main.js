@@ -14,8 +14,13 @@
   "use strict";
 
   var LOCAL = location.hostname === "localhost" || location.hostname === "127.0.0.1";
-  var API = LOCAL ? "http://localhost:8080/feedback" : "https://api.eduneko.cloud/feedback";
+  var ORIGIN = LOCAL ? "http://localhost:8080" : "https://api.eduneko.cloud";
+  var API = ORIGIN + "/feedback";
   var KEY = "edunotes-beta.";
+  // The API scales to zero: focusing anything on the page wakes it (at most every
+  // WARM_EVERY), and a request that fails while it is starting is retried once.
+  var RETRY_DELAY = 1500;
+  var WARM_EVERY = 5 * 60 * 1000;
 
   var STATUSES = [
     { value: "pass", label: "Pass" },
@@ -52,15 +57,38 @@
     return store.get("token");
   })();
 
+  var warmedAt = 0;
+
+  function warmUp() {
+    var now = Date.now();
+    if (now - warmedAt < WARM_EVERY) return;
+    warmedAt = now;
+    fetch(ORIGIN + "/healthz", { mode: "no-cors" }).catch(function () { /* only a wake-up */ });
+  }
+
+  document.addEventListener("focusin", warmUp);
+
+  function retryable(res) {
+    return res.status === 502 || res.status === 503 || res.status === 504;
+  }
+
   function api(method, path, body) {
-    return fetch(API + path, {
-      method: method,
-      headers: Object.assign(
-        { Authorization: "Bearer " + token },
-        body ? { "Content-Type": "application/json" } : {}
-      ),
-      body: body ? JSON.stringify(body) : undefined
-    }).then(function (res) {
+    function send() {
+      return fetch(API + path, {
+        method: method,
+        headers: Object.assign(
+          { Authorization: "Bearer " + token },
+          body ? { "Content-Type": "application/json" } : {}
+        ),
+        body: body ? JSON.stringify(body) : undefined
+      });
+    }
+    function later() {
+      return new Promise(function (resolve) { setTimeout(resolve, RETRY_DELAY); }).then(send);
+    }
+    return send().then(function (res) {
+      return retryable(res) ? later() : res;
+    }, later).then(function (res) {
       return res.json().catch(function () { return {}; }).then(function (data) {
         if (!res.ok) {
           var err = new Error(data.error || "HTTP " + res.status);
