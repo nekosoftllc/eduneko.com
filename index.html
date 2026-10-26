@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eduneko — Technical training, content, EduNotes &amp; Gliff</title>
-<meta name="description" content="Eduneko runs hands-on technical training in programming, Google Cloud, and GenAI, creates the courses and content that make it stick, and is building two apps: EduNotes, a workspace for annotating and presenting with Apple Pencil, and Gliff, for learning to read non-Latin scripts.">
+<title>Eduneko — Technical training, content, EduNotes, Gliff &amp; Numerals</title>
+<meta name="description" content="Eduneko runs hands-on technical training in programming, Google Cloud, and GenAI, creates the courses and content that make it stick, and is building apps for learning: EduNotes, a workspace for annotating and presenting with Apple Pencil; Gliff, for learning to read non-Latin scripts; and Numerals, which writes any number in 11 numeral systems.">
 
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="icon" href="assets/favicon-32.png" type="image/png">
@@ -35,6 +35,7 @@
       <a href="#content">Content</a>
       <a href="#edunotes">EduNotes</a>
       <a href="#gliff">Gliff</a>
+      <a href="#numerals">Numerals</a>
       <a href="#contact" class="nav-cta">Get in touch</a>
     </nav>
   </div>
@@ -44,7 +45,7 @@
 
   <section class="hero" id="top">
     <div class="wrap hero-inner">
-      <p class="eyebrow reveal">Technical training · Content · EduNotes · Gliff</p>
+      <p class="eyebrow reveal">Technical training · Content · EduNotes · Gliff · Numerals</p>
       <h1 class="reveal">We teach technology.<br>We write it down.<br>We help you read the world.</h1>
       <p class="hero-sub reveal">Eduneko runs hands-on training in programming, Google Cloud, and GenAI — from first principles to agentic applications — and creates the courses, articles, and video that make it stick.</p>
       <div class="hero-actions reveal">
@@ -168,10 +169,45 @@
     </div>
   </section>
 
+  <section class="section section-alt numerals" id="numerals">
+    <div class="wrap numerals-inner">
+      <div class="numerals-text">
+        <p class="eyebrow reveal">Coming soon · iPhone &amp; iPad</p>
+        <h2 class="reveal">Numerals — one number, eleven ways to write it</h2>
+        <p class="section-intro reveal">Explore how numbers are written across scripts, cultures, and centuries. Type a number and Numerals writes it in Devanagari, Gujarati, Punjabi, Tamil, Eastern Arabic or Persian digits, or in Roman, Japanese, Greek, Hebrew or Egyptian hieroglyphic notation.</p>
+
+        <ul class="edunotes-points">
+          <li class="reveal"><strong>Compare at a glance.</strong> See the same value in another script or tradition as you type.</li>
+          <li class="reveal"><strong>Choose the notation.</strong> Additive Roman fours, Japanese financial characters, Greek stigma, Hebrew marks.</li>
+          <li class="reveal"><strong>Take it with you.</strong> Long press the result to copy it as text or share it.</li>
+        </ul>
+
+        <div class="hero-actions reveal">
+          <a href="numerals/" class="btn btn-primary">Discover Numerals</a>
+          <a href="numerals/#notify" class="btn btn-ghost">Get notified</a>
+        </div>
+      </div>
+
+      <!-- Real text, not an image: 2026 as the app writes it with its default options. -->
+      <figure class="numerals-specimen reveal">
+        <dl>
+          <div><dt>Roman</dt><dd>MMXXVI</dd></div>
+          <div><dt>Devanagari</dt><dd lang="hi">२०२६</dd></div>
+          <div><dt>Japanese</dt><dd lang="ja">二千二十六</dd></div>
+          <div><dt>Eastern Arabic</dt><dd lang="ar">٢٠٢٦</dd></div>
+          <div><dt>Greek</dt><dd lang="el">͵ΒΚϜʹ</dd></div>
+          <div><dt>Hebrew</dt><dd lang="he" dir="rtl">&#x200F;ב׳ כו</dd></div>
+          <div><dt>Hieroglyphic</dt><dd lang="egy" class="numerals-hieroglyphs">𓆽𓎇𓏿</dd></div>
+        </dl>
+        <figcaption>2026, seven of the eleven ways</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="section contact" id="contact">
     <div class="wrap contact-inner">
       <h2 class="reveal">Let's talk</h2>
-      <p class="section-intro reveal">Training for your team, a content project, or just curious about EduNotes or Gliff — reach out.</p>
+      <p class="section-intro reveal">Training for your team, a content project, or just curious about EduNotes, Gliff or Numerals — reach out.</p>
       <a class="contact-email reveal" href="mailto:hello@eduneko.eu">hello@eduneko.eu</a>
 
       <!-- Contact form: stored and forwarded to hello@eduneko.eu by the API (see js/main.js). -->
@@ -194,6 +230,7 @@
             <option value="content">A content project</option>
             <option value="gliff">Gliff</option>
             <option value="edunotes">EduNotes</option>
+            <option value="numerals">Numerals</option>
             <option value="other">Something else</option>
           </select>
         </label>

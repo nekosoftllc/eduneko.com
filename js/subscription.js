@@ -8,7 +8,8 @@
   var API = LOCAL ? "http://localhost:8080" : "https://api.eduneko.cloud";
 
   // Where each product's "see what's new" link points, relative to this page.
-  var PRODUCT_PAGES = { edunotes: "../edunotes/", gliff: "../#gliff" };
+  var PRODUCT_PAGES = { edunotes: "../edunotes/", gliff: "../#gliff", numerals: "../numerals/" };
+  var PRODUCT_NAMES = { edunotes: "EduNotes", gliff: "Gliff", numerals: "Numerals" };
 
   var params = new URLSearchParams(location.search);
   var confirmToken = params.get("confirm");
@@ -34,7 +35,7 @@
     var link = next.querySelector("a");
     if (product && PRODUCT_PAGES[product]) {
       link.href = PRODUCT_PAGES[product];
-      link.textContent = "Back to " + (product === "edunotes" ? "EduNotes" : "Gliff");
+      link.textContent = "Back to " + PRODUCT_NAMES[product];
     }
     next.hidden = false;
   }
