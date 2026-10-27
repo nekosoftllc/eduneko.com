@@ -360,9 +360,20 @@ a { color: var(--color-brand); }
   color: var(--color-on-night-soft);
 }
 .footer-meta p { margin: 0; }
-.footer-meta nav { display: flex; gap: 8px; }
+.footer-meta nav { display: flex; flex-wrap: wrap; gap: 8px; }
 .footer-meta a { color: var(--color-on-night-soft); text-decoration: none; }
 .footer-meta a:hover { color: var(--color-on-night); }
+
+/* ---------- App privacy page ---------- */
+.doc { max-width: 720px; }
+.doc h1 { font-size: clamp(30px, 4vw, 42px); }
+.doc h2 { font-size: 21px; margin-top: 2em; }
+.doc-meta { color: var(--color-muted); font-size: 15px; }
+.doc ul { padding-left: 1.2em; }
+.doc li { margin-bottom: 0.6em; }
+
+.site-footer-plain { padding: 0 0 32px; }
+.site-footer-plain .footer-meta { margin-top: 0; border-top: none; padding-top: 32px; }
 
 /* ---------- Motion ---------- */
 @media (prefers-reduced-motion: reduce) {
@@ -386,5 +397,5 @@ a { color: var(--color-brand); }
   .gallery { grid-template-columns: repeat(2, 1fr); }
   .audience-grid, .facts { grid-template-columns: 1fr; }
   .notify-row { flex-direction: column; }
-  .footer-meta { justify-content: center; text-align: center; }
+  .footer-meta, .footer-meta nav { justify-content: center; text-align: center; }
 }
